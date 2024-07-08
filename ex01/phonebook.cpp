@@ -96,9 +96,6 @@ int	main()
 					continue ;
 				}
 
-				//cannot catch (const std::invalid_argument& ia) error in this case
-				//because stol would accept something like "985jbsdjb" and just set
-				//it to 985jbsdjb. So we must manually parse the string.
 				bool flag = false;
 				for (size_t i = 0; i < phone_number_str.size(); i++) {
 					if (isdigit(phone_number_str[i]) == false)
@@ -108,21 +105,18 @@ int	main()
 						break ;
 					}
 				}
+				if (phone_number_str.size() >= 19)
+				{
+					std::cerr << "Error: Phone numbers longer than 18 digits cannot be accepted\n" << std::endl;
+					flag = true;
+				}
 				if (flag == true)
 					continue ;
 
-				long	phone_number_int;
-				try
-				{
-					const char *c_phone_number_str = phone_number_str.c_str();
-					phone_number_int = atol(c_phone_number_str);
-				}
-				catch (const std::out_of_range& oor)
-				{
-					std::cerr << "Error: Invalid phone number. Please try again\n" << std::endl;
-					continue ;
-				}
-				PhoneBook.list[i].phone_number = phone_number_int;
+				long long	phone_number_long;
+				const char *c_phone_number_str = phone_number_str.c_str();
+				phone_number_long = atol(c_phone_number_str);
+				PhoneBook.list[i].phone_number = phone_number_long;
 				break ;
 			} while (1);
 
