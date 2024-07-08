@@ -1,29 +1,9 @@
-#include <iostream>
+
 #include <iomanip>
-#include <string>
-
-class	Contact
-{
-	public:
-		int				index;
-		std::string		first_name;
-		std::string		last_name;
-		std::string		nickname;
-		int				phone_number;
-		std::string		darkest_secret;
-	
-	Contact() : index(-1) {};
-};
-
-
-class	PhoneBook
-{
-	public:
-		Contact	list[8];
-		int		contact_count;
-
-	PhoneBook() : contact_count(0) {};
-};
+#include <iostream>
+#include "Contact.hpp"
+#include "PhoneBook.hpp"
+#include <cstdlib>
 
 void	debugger(PhoneBook PhoneBook)
 {
@@ -121,7 +101,7 @@ int	main()
 				//it to 985jbsdjb. So we must manually parse the string.
 				bool flag = false;
 				for (size_t i = 0; i < phone_number_str.size(); i++) {
-					if (std::all_of(phone_number_str.begin(), phone_number_str.end(), isdigit) == false)
+					if (isdigit(phone_number_str[i]) == false)
 					{
 						std::cerr << "Error: Phone number must include digits only. Please try again\n" << std::endl;
 						flag = true;
@@ -134,7 +114,8 @@ int	main()
 				long	phone_number_int;
 				try
 				{
-					phone_number_int = stol(phone_number_str);
+					const char *c_phone_number_str = phone_number_str.c_str();
+					phone_number_int = atol(c_phone_number_str);
 				}
 				catch (const std::out_of_range& oor)
 				{
@@ -179,30 +160,34 @@ int	main()
 			}
 
 			std::cout << "\n";
-			int	index_int;
+			long long	index_int;
 			do
 			{
+				if (PhoneBook.list[0].index == -1)
+				{
+					std::cerr << "Error: Couldn't fetch contacts, contact list empty\n" << std::endl;
+					break ;
+				}
 				std::cout << "Select the index of the contact you would like to view: ";
 				std::string	index_str;
 				if (!getline(std::cin, index_str))
 					exit(1);
-				try
-				{
-					index_int = stoi(index_str);
-					if (index_int < 0 || index_int >= 8)
+				bool flag = false;
+				for (size_t i = 0; i < index_str.size(); i++) {
+					if (isdigit(index_str[i]) == false)
 					{
-						std::cerr << "Error: Must select a value between 0-7. Please try again\n" << std::endl;
-						continue ;
+						std::cerr << "Error: Invalid argument. Please try again\n" << std::endl;
+						flag = true;
+						break ;
 					}
 				}
-				catch (const std::invalid_argument& ia)
-				{
-					std::cerr << "Error: Invalid argument. Please try again\n" << std::endl;
+				if (flag == true)
 					continue ;
-				} 
-				catch (const std::out_of_range& oor)
+				const char *c_index_str = index_str.c_str();
+				index_int = atol(c_index_str);
+				if (index_int < 0 || index_int >= 8)
 				{
-					std::cerr << "Error: Out of range, must select a value between 0-7. Please try again\n" << std::endl;
+					std::cerr << "Error: Must select a value between 0-7. Please try again\n" << std::endl;
 					continue ;
 				}
 				if (PhoneBook.list[index_int].index != -1)
