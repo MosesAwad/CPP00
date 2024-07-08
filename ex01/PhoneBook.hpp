@@ -13,4 +13,16 @@ class	PhoneBook
 	PhoneBook() : contact_count(0) {};
 };
 
+// addPhoneBook.cpp
+void	add(PhoneBook& PhoneBook);
+
+// searchPhoneBook.cpp
+void	search(PhoneBook& PhoneBook);
+
+// exitPhoneBook.cpp
+void	exit_menu();
+
+// main.cpp
+std::string	truncate(std::string target);
+
 #endif
