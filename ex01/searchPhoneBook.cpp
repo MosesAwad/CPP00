@@ -8,9 +8,9 @@
 	The setw(10) function ensures that the entry is at least 10 
 	characters wide by padding it with spaces if it is shorter than
 	10 characters, but if the entry is longer than 10 characters, it
-	does not truncate it. That is why I manually truncate using my 
-	truncate() function which is defined in main.cpp and used in 
-	addPhoneBook.cpp.
+	does not truncate it. That is why I manually truncate while 
+	displaying the entries via my truncate() function which is defined
+	in main.cpp.
 */
 void	search(PhoneBook& PhoneBook)
 {
@@ -23,9 +23,9 @@ void	search(PhoneBook& PhoneBook)
 		if (PhoneBook.list[i].index == -1)
 			break ;
 		std::cout	<< std::setw(10) << std::string(1, (PhoneBook.list[i].index + '0')) << "|"
-					<< std::setw(10) << PhoneBook.list[i].first_name << "|"
-					<< std::setw(10) << PhoneBook.list[i].last_name << "|"
-					<< std::setw(10) << PhoneBook.list[i].nickname << "|"
+					<< std::setw(10) << truncate(PhoneBook.list[i].first_name) << "|"
+					<< std::setw(10) << truncate(PhoneBook.list[i].last_name) << "|"
+					<< std::setw(10) << truncate(PhoneBook.list[i].nickname) << "|"
 					<< std::endl;
 					std::cout << "--------------------------------------------" << std::endl;
 	}
@@ -65,9 +65,9 @@ void	search(PhoneBook& PhoneBook)
 		{
 			std::cout << "\nYour selection: " << index_int << " [" << PhoneBook.list[index_int].first_name << "]" << std::endl;
 			std::cout << "\n";
-			std::cout << "First Name: " << truncate(PhoneBook.list[index_int].first_name) << std::endl;
-			std::cout << "Last Name: " << truncate(PhoneBook.list[index_int].last_name) << std::endl;
-			std::cout << "Nickname: " << truncate(PhoneBook.list[index_int].nickname) << std::endl;
+			std::cout << "First Name: " << PhoneBook.list[index_int].first_name << std::endl;
+			std::cout << "Last Name: " << PhoneBook.list[index_int].last_name << std::endl;
+			std::cout << "Nickname: " << PhoneBook.list[index_int].nickname << std::endl;
 			std::cout << "\n";
 			break ;
 		}

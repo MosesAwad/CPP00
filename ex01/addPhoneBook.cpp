@@ -23,7 +23,7 @@ void	add(PhoneBook& PhoneBook)
 		else
 			flag = true;
 		if (PhoneBook.list[i].first_name.size() > 10)
-			PhoneBook.list[i].first_name = truncate(PhoneBook.list[i].first_name);
+			PhoneBook.list[i].first_name = PhoneBook.list[i].first_name;
 	} while (flag == false);
 
 	// Obtain last name entry and parse for empty strings and make sure entry is no longer than 10 characters wide
@@ -38,7 +38,7 @@ void	add(PhoneBook& PhoneBook)
 		else
 			flag = true;
 		if (PhoneBook.list[i].last_name.size() > 10)
-			PhoneBook.list[i].last_name = truncate(PhoneBook.list[i].last_name);
+			PhoneBook.list[i].last_name = PhoneBook.list[i].last_name;
 	} while (flag == false);
 
 	// Obtain nickname entry and parse for empty strings and make sure entry is no longer than 10 characters wide
@@ -52,7 +52,7 @@ void	add(PhoneBook& PhoneBook)
 		else
 			flag = true;
 		if (PhoneBook.list[i].nickname.size() > 10)
-			PhoneBook.list[i].nickname = truncate(PhoneBook.list[i].nickname);
+			PhoneBook.list[i].nickname = PhoneBook.list[i].nickname;
 	} while (flag == false);
 
 	// Obtain phone number entry and parse for empty strings, non-digit entries, & out of range entries
