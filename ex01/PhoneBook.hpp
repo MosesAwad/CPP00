@@ -6,18 +6,14 @@
 
 class	PhoneBook
 {
-	public:
+	private:
 		Contact	list[8];
 		int		contact_count;
-
-	PhoneBook() : contact_count(0) {};
+	public:
+		PhoneBook() : contact_count(0) {};
+		void		add();
+		void		search();
 };
-
-// addPhoneBook.cpp
-void	add(PhoneBook& PhoneBook);
-
-// searchPhoneBook.cpp
-void	search(PhoneBook& PhoneBook);
 
 // exitPhoneBook.cpp
 void	exit_menu();

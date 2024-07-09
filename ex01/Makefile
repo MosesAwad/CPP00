@@ -1,7 +1,7 @@
 NAME = phonebook
 CXX = c++
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -std=c++98
-SRCS = main.cpp addPhoneBook.cpp exitPhoneBook.cpp searchPhoneBook.cpp
+SRCS = main.cpp addPhoneBook.cpp exitPhoneBook.cpp searchPhoneBook.cpp Contact.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)

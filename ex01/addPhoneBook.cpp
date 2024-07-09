@@ -4,26 +4,24 @@
 #include <iostream>
 #include <cstdlib>
 
-void	add(PhoneBook& PhoneBook)
+void	PhoneBook::add()
 {
 	int	i;
 
-	i = PhoneBook.contact_count % 8;
-	PhoneBook.list[i].index = i;
+	i = this->contact_count % 8;
+	this->list[i].set_index(i);
 	bool flag = false;
 
 	// Obtain first name entry and parse for empty strings and make sure entry is no longer than 10 characters wide
 	do
 	{
 		std::cout << "Please input a first name: ";
-		if (!getline(std::cin, PhoneBook.list[i].first_name))
+		if (!getline(std::cin, this->list[i].get_first_name()))
 			exit(1);
-		if (PhoneBook.list[i].first_name == "")
+		if (this->list[i].get_first_name() == "")
 			std::cerr << "Error: Field cannot be empty\n" << std::endl;
 		else
 			flag = true;
-		if (PhoneBook.list[i].first_name.size() > 10)
-			PhoneBook.list[i].first_name = PhoneBook.list[i].first_name;
 	} while (flag == false);
 
 	// Obtain last name entry and parse for empty strings and make sure entry is no longer than 10 characters wide
@@ -31,28 +29,24 @@ void	add(PhoneBook& PhoneBook)
 	do
 	{
 		std::cout << "Please input a last name: ";
-		if (!getline(std::cin, PhoneBook.list[i].last_name))
+		if (!getline(std::cin, this->list[i].get_last_name()))
 			exit(1);
-		if (PhoneBook.list[i].last_name == "")
+		if (this->list[i].get_last_name() == "")
 			std::cerr << "Error: Field cannot be empty\n" << std::endl;
 		else
 			flag = true;
-		if (PhoneBook.list[i].last_name.size() > 10)
-			PhoneBook.list[i].last_name = PhoneBook.list[i].last_name;
 	} while (flag == false);
 
 	// Obtain nickname entry and parse for empty strings and make sure entry is no longer than 10 characters wide
 	do
 	{
 		std::cout << "Please input a nickname: ";
-		if (!getline(std::cin, PhoneBook.list[i].nickname))
+		if (!getline(std::cin, this->list[i].get_nickname()))
 			exit(1);
-		if (PhoneBook.list[i].nickname == "")
+		if (this->list[i].get_nickname() == "")
 			std::cerr << "Error: Field cannot be empty\n" << std::endl;
 		else
 			flag = true;
-		if (PhoneBook.list[i].nickname.size() > 10)
-			PhoneBook.list[i].nickname = PhoneBook.list[i].nickname;
 	} while (flag == false);
 
 	// Obtain phone number entry and parse for empty strings, non-digit entries, & out of range entries
@@ -89,7 +83,7 @@ void	add(PhoneBook& PhoneBook)
 		long long	phone_number_long;
 		const char *c_phone_number_str = phone_number_str.c_str();
 		phone_number_long = atol(c_phone_number_str);
-		PhoneBook.list[i].phone_number = phone_number_long;
+		this->list[i].set_phone_number(phone_number_long);
 		break ;
 	} while (1);
 
@@ -98,15 +92,15 @@ void	add(PhoneBook& PhoneBook)
 	do
 	{
 		std::cout << "Please type in your darkest secret: ";
-		if (!getline(std::cin, PhoneBook.list[i].darkest_secret))
+		if (!getline(std::cin, this->list[i].get_darkest_secret()))
 			exit(1);
-		if (PhoneBook.list[i].last_name == "")
+		if (this->list[i].get_darkest_secret() == "")
 			std::cerr << "Error: Field cannot be empty\n" << std::endl;
 		else
 			flag = true;
 	} while (flag == false);
 
 	// Update the contact count upon success of all contact-related entries
-	PhoneBook.contact_count++;
+	this->contact_count++;
 	std::cout << "\n";
 }

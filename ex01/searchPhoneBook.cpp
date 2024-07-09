@@ -12,7 +12,7 @@
 	displaying the entries via my truncate() function which is defined
 	in main.cpp.
 */
-void	search(PhoneBook& PhoneBook)
+void	PhoneBook::search()
 {
 	std::cout	<< std::setw(10) << "Index" << "|"
 				<< std::setw(10) << "F_Name" << "|"
@@ -20,12 +20,12 @@ void	search(PhoneBook& PhoneBook)
 				<< std::setw(10) << "N_name" << "|" << std::endl;
 	std::cout	<< "--------------------------------------------" << std::endl;
 	for (int i = 0; i < 8; i++) {
-		if (PhoneBook.list[i].index == -1)
+		if (this->list[i].get_index() == -1)
 			break ;
-		std::cout	<< std::setw(10) << std::string(1, (PhoneBook.list[i].index + '0')) << "|"
-					<< std::setw(10) << truncate(PhoneBook.list[i].first_name) << "|"
-					<< std::setw(10) << truncate(PhoneBook.list[i].last_name) << "|"
-					<< std::setw(10) << truncate(PhoneBook.list[i].nickname) << "|"
+		std::cout	<< std::setw(10) << std::string(1, (this->list[i].get_index() + '0')) << "|"
+					<< std::setw(10) << truncate(this->list[i].get_first_name()) << "|"
+					<< std::setw(10) << truncate(this->list[i].get_last_name()) << "|"
+					<< std::setw(10) << truncate(this->list[i].get_nickname()) << "|"
 					<< std::endl;
 					std::cout << "--------------------------------------------" << std::endl;
 	}
@@ -34,7 +34,7 @@ void	search(PhoneBook& PhoneBook)
 	long long	index_int;
 	do
 	{
-		if (PhoneBook.list[0].index == -1)
+		if (this->list[0].get_index() == -1)
 		{
 			std::cerr << "Error: Couldn't fetch contacts, contact list empty\n" << std::endl;
 			break ;
@@ -61,13 +61,13 @@ void	search(PhoneBook& PhoneBook)
 			std::cerr << "Error: Must select a value between 0-7. Please try again\n" << std::endl;
 			continue ;
 		}
-		if (PhoneBook.list[index_int].index != -1)
+		if (this->list[index_int].get_index() != -1)
 		{
-			std::cout << "\nYour selection: " << index_int << " [" << PhoneBook.list[index_int].first_name << "]" << std::endl;
+			std::cout << "\nYour selection: " << index_int << " [" << this->list[index_int].get_first_name() << "]" << std::endl;
 			std::cout << "\n";
-			std::cout << "First Name: " << PhoneBook.list[index_int].first_name << std::endl;
-			std::cout << "Last Name: " << PhoneBook.list[index_int].last_name << std::endl;
-			std::cout << "Nickname: " << PhoneBook.list[index_int].nickname << std::endl;
+			std::cout << "First Name: " << this->list[index_int].get_first_name() << std::endl;
+			std::cout << "Last Name: " << this->list[index_int].get_last_name() << std::endl;
+			std::cout << "Nickname: " << this->list[index_int].get_nickname() << std::endl;
 			std::cout << "\n";
 			break ;
 		}
